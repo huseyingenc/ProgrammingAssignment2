@@ -1,7 +1,3 @@
-#These pair of functions cache inverse of a matrix and catche it.
-#If the inverse of the matrix is cached before then 
-#it just returns it without new calculation.
-
 #First function
 #set the value of the matrix, get the value of the matrix
 #set the value of the inverse, get the value of the inverse
@@ -13,11 +9,11 @@ makeCacheMatrix <- function(x = matrix()) {
 		m<<-NULL
 	}
 	get<-function() x
-	setmatrix<-function(solve) m<<- solve
-	getmatrix<-function() m
+	setinverse<-function(solve) m<<- solve
+	getinverse<-function() m
 	list(set=set, get=get,
-		setmatrix=setmatrix,
-		getmatrix=getmatrix)
+		setinverse=setinverse,
+		getinverse=getinverse)
 	}
 
 #Checks if inverse of the matrix is calculated already and 
@@ -25,13 +21,13 @@ makeCacheMatrix <- function(x = matrix()) {
 #it calculates the value and caches it in setmatrix.
 
 cacheSolve <- function(x=matrix(), ...) {
-	m<-x$getmatrix()
+	m<-x$getinverse()
 	if(!is.null(m)){
 		message("getting cached data")
 		return(m)
 	}
 	matrix<-x$get()
 	m<-solve(matrix, ...)
-	x$setmatrix(m)
+	x$setinverse(m)
 	m
 }
